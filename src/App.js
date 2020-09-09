@@ -1,43 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { render } from '@testing-library/react';
 
-function Food({name}) {
-	return <h1> I like {name}</h1>
-}
+class App extends React.Component{
+	state = {
+		isLoading : true,
+		movies : []
+	};
 
-const foodILike = [
-	{
-		name : 'kimchi',
-		image : 'ttt'
-	},
-	{
-		name : 'kimchi1',
-		image : 'ttt'
-	},
-	{
-		name : 'kimchi2',
-		image : 'ttt'
-	},
-	{
-		name : 'kimchi3',
-		image : 'ttt'
+	componentDidMount() {
+		setTimeout(()=>{
+			this.setState( {isLoading : false});
+		}, 5000);
 	}
-];
+	render(){
+		const { isLoading} =this.state;
+		return <div>
+			{isLoading? "Loading..." : "we are ready"}
+		</div>;
+	}
 
-function renderFood(dish){
-	return <Food name={dish.name}> </Food>
+
 }
 
-Food.PropTypes = {
-	name : PropTypes.string.isRequired, 
-}
-
-function App() {
-  return (
-    <div> 
-		{foodILike.map(renderFood)}
-    </div>
-  );
-}
 
 export default App;
